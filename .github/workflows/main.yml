@@ -1,15 +1,25 @@
 name: My Workflow
+
 on:
   push:
     branches:
       - main
 
-
 jobs:
-  my_job:
+  build:
     runs-on: ubuntu-latest
+
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
-    - name: Run my script
-      run: node script.js
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run script
+        run: node script.js
